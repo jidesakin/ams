@@ -11,11 +11,20 @@
 |
 */
 
+
+//Home page route
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('login');
 });
 
+//Handles login post request
+Route::post('login', 'HomeController@login');
+
+//Handles dashboard request
+Route::get('dashboard', 'DashboardController@index');
+
+//Handles user request
 Route::get('users', function(){
 
     $users = User::all();
@@ -23,3 +32,11 @@ Route::get('users', function(){
    return View::make('users')->with('users', $users);
 });
 
+//Handles logout request
+Route::get('logout', 'HomeController@logout');
+
+//Handles view all assets request
+Route::get('assets/all', '');
+
+//Handles create new user request
+Route::get('user/new', 'DashboardController@newUserForm');

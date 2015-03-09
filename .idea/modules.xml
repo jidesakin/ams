@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/learninglaravel.iml" filepath="$PROJECT_DIR$/.idea/learninglaravel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ams.iml" filepath="$PROJECT_DIR$/.idea/ams.iml" />
     </modules>
   </component>
 </project>
