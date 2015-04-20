@@ -16,6 +16,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
 
+    public static $rules = array(
+        'group_id' => 'required|integer',
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'username' => 'required',
+        'email' => 'required|email',
+        'password' => 'required',
+        'telephone' => 'required'
+    );
+
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -49,7 +59,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function group(){
-
+        return $this->belongsTo('Group');
     }
 
 }

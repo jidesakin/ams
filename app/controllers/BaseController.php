@@ -2,6 +2,13 @@
 
 class BaseController extends Controller {
 
+    public function __construct(){
+        $this->beforeFilter(function(){
+
+            View::share('groupnav', Group::all());
+        });
+    }
+
 	/**
 	 * Setup the layouts used by the controller.
 	 *

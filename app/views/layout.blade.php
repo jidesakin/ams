@@ -294,7 +294,7 @@
                                 <li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet"> Depreciation Report</span></a></li>
                             	<li><a class="submenu" href="{{URL::to('report/license')}}"><i class="icon-certificate"></i><span class="hidden-tablet"> License Report</span></a></li>
                             	<li><a class="submenu" href="{{URL::to('report/asset')}}"><i class="icon-barcode"></i><span class="hidden-tablet"> Asset Report</span></a></li>
-                            	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet"> Custom Asset Report</span></a></li>
+                            	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet"> Custom Report</span></a></li>
                             </ul>
 						</li>
 						<li>

@@ -9,7 +9,7 @@
 class DashboardController extends BaseController{
 
     public function __construct(){
-
+        parent::__construct();
         $this->beforeFilter('crsf', array('on' => 'post'));
         $this->beforeFilter('auth', array('on' => array('index')));
     }
@@ -27,7 +27,19 @@ class DashboardController extends BaseController{
     public function newUserForm(){
         //Renders new user form
         if(Session::has('user')){
-            return View::make('new_user');
+            $group_options = DB::table('groups')->orderBy('group_name', 'asc')->lists('group_name', 'group_id');
+            return View::make('new_user', array('group_options' => $group_options));
+        }else{
+            return Redirect::to('/');
+        }
+    }
+
+
+    public function newAssetForm(){
+        //Renders new user form
+        if(Session::has('user')){
+            $group_options = DB::table('groups')->orderBy('group_name', 'asc')->lists('group_name', 'group_id');
+            return View::make('new_asset', array('group_options' => $group_options));
         }else{
             return Redirect::to('/');
         }

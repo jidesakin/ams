@@ -40,3 +40,9 @@ Route::get('assets/all', '');
 
 //Handles create new user request
 Route::get('user/new', 'DashboardController@newUserForm');
+
+//Create user action
+Route::post('user/create', 'UserController@create');
+
+//Gets create new asset form
+Route::get('asset/new', 'DashboardController@newAssetForm');
