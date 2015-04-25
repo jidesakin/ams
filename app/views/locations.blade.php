@@ -1,19 +1,17 @@
 @extends('layout')
 
-@section('title')
-
-Users | Asset Management System
-@stop
-
-@section('row_1')
-        <a href="{{URL::to('user/new')}}" class="btn btn-success pull-right"><i class="icon-plus"></i>  Create New</a>
+    @section('title')
+        Locations | Asset Management System
     @stop
 
+    @section('row_1')
+        <a href="{{URL::to('location/new')}}" class="btn btn-success pull-right"><i class="icon-plus"></i>  Create New</a>
+    @stop
 
     @section('row_2')
     <div class="box span12">
     <div class="box-header" data-original-title="">
-    						<h2><i class="icon-user"></i><span class="break"></span>Users</h2>
+    						<h2><i class="icon-map-marker"></i><span class="break"></span>Locations</h2>
     						<div class="box-icon">
     							<a href="#" class="btn-setting"><i class="icon-wrench"></i></a>
     							<a href="#" class="btn-minimize"><i class="icon-chevron-up"></i></a>
@@ -23,26 +21,22 @@ Users | Asset Management System
     <div class="box-content">
     <table class="table table-bordered bootstrap-datatable datatable">
         <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Phone Number</th>
-            <th>Email Address</th>
-            <th>Group</th>
+            <th>Location Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
             <th>Actions</th>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($locations as $location)
 
             <tr>
-            	<td>{{$user->firstname}}</td>
-            	<td>{{$user->lastname}}</td>
-            	<td class="center">{{$user->username}}</td>
-            	<td class="center">{{$user->telephone}}</td>
-            	<td class="center">{{$user->email}}</td>
-            	<td class="center">{{$user->group_name}}</td>
-
-
+            	<td>{{$location->location_name}}</td>
+            	<td>{{$location->address}}</td>
+            	<td class="center">{{$location->city}}</td>
+            	<td class="center">{{$location->state}}</td>
+            	<td class="center">{{$location->country}}</td>
             								<td class="center">
             									<a class="btn btn-success" href="#">
             										<i class="icon-zoom-in "></i>

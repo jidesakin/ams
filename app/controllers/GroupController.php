@@ -13,24 +13,49 @@ class GroupController extends BaseController{
         $this->beforeFilter('crsf', array('on' => 'post'));
     }
 
-    public function getIndex(){
-        return View::make('groups.index')
-            ->with('groups', Group::all());
-    }
+    public function index(){
 
-    public function postCreate(){
-        $validator = Validator::make(Input::all(), Group::$rules);
-
-        if ($validator->passes()){
-            $group = new Group;
-            $group->name = Input::get('name');
-            $group->save();
+        if(Session::has('user')){
+            $groups = DB::table('groups')->get();
+            return View::make('groups')->with('groups', $groups);
+        }else{
+            return Redirect::to('/');
         }
 
-        return Redirect::to('group/new')
-            ->with('message', 'Something went wrong')
-            ->withErrors($validator)
-            ->withInput();
+
+    }
+
+    public function newGroupForm(){
+
+        if(Session::has('user')){
+
+            return View::make('new_group');
+        }else{
+            return Redirect::to('/');
+        }
+
+
+    }
+
+    public function create(){
+        $validator = Validator::make(Input::all(), Group::$rules);
+
+        if($validator->fails()){
+
+            return Redirect::to('group/new')->withErrors($validator)->with('error', 'Unable to create group');
+
+        }
+        $group = new Group();
+        $group->group_id = '';
+        $group->group_name = Input::get('group_name');
+        $group->admin_right = Input::get('admin_right');
+        $group->report_right = Input::get('reporting_right');
+
+
+        $group->save();
+
+        return Redirect::to('group/new')->with('success', 'Group has been successfully created.');
+
     }
 
     public function postDestroy(){

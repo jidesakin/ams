@@ -10,6 +10,10 @@ class Group extends Eloquent {
 
     protected $table = "groups";
 
+    public static $rules = array(
+
+    );
+
     public function users(){
         return $this->hasMany('User');
     }

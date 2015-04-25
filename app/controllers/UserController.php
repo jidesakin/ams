@@ -12,6 +12,15 @@ class UserController extends BaseController{
         parent::__construct();
     }
 
+    public function index(){
+        //Fetches all the users and displays them in a datatable
+        $users = DB::table('users')->join('groups', 'users.group_id', '=',
+        'groups.group_id')
+            ->select('users.user_id', 'users.firstname', 'users.lastname', 'users.username','users.telephone', 'users.email', 'groups.group_name')->get();
+
+        return View::make('users', array('users' => $users));
+    }
+
     public function login($username, $password){
         if(Auth::attempt(array('username' => $username, 'password' => $password))){
             return Redirect::intended('dashboard');
@@ -24,7 +33,7 @@ class UserController extends BaseController{
 
         if($validator->fails()){
 
-            return Redirect::to('user/new')->withErrors($validator)->withInput(Input::except('password'));
+            return Redirect::to('user/new')->withErrors($validator)->withInput(Input::except('password'))->with('error', 'Invalid credentials! Unable to create user');
 
         }
         $user = new User;
@@ -39,15 +48,17 @@ class UserController extends BaseController{
         $user->profile_pic_url = 'img/avatar.jpg';
         $user->admin_right = Input::get('admin_right');
         $user->save();
-        return Redirect::to('user/new')->with('flash_notice', 'User has been successfully created.');
+
+//        var_dump($user);
+
+        return Redirect::to('user/new')->with('success', 'User has been successfully created.');
 
     }
 
-    public function handleCreate(){
-        //handle create new user form submission
-    }
 
     public function edit(User $user){
         //
     }
+
+
 } 

@@ -18,19 +18,16 @@
     						{{ Form::open(array('url'=> 'user/create', 'class' => 'form-horizontal')) }}
 
     						  <fieldset>
-    						  @if($errors->has)
+    						  @if(Session::has('error'))
     						    <div class="alert alert-error">
-    						    <ul class="errors">
-                                 @foreach($errors->all() as $message)
-                                 <li>{{ $message }}</li>
-                                 @endforeach
-                                 </ul>
+    						        {{Session::get('error')}}
     						    </div>
     						  @endif
+    						  @if(Session::has('success'))
     						  <div class="alert alert-success control-group">
-
+                                   {{Session::get('success')}}
     						  </div>
-
+                              @endif
     							<div class="control-group">
     							  <label class="control-label" for="firstname">First Name </label>
     							  <div class="controls">

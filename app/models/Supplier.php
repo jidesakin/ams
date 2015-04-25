@@ -8,4 +8,10 @@
 
 class Supplier extends Eloquent{
 
+    protected $table = 'suppliers';
+
+    public static $rules = array(
+        'supplier_name' => 'required',
+        'supplier_address' => 'required'
+    );
 } 

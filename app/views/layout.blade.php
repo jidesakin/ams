@@ -57,7 +57,7 @@
 				</a>
 				<a id="main-menu-toggle" class="hidden-phone open"><i class="icon-reorder"></i></a>
 				<div class="row-fluid">
-				<a class="brand span2" href="index.html"><span>ams</span></a>
+				<a class="brand span2" href="{{URL::to('/')}}"><span>ams</span></a>
 				</div>
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -214,18 +214,27 @@
                                 <li class="dropdown-menu-title">
 
 								</li>
-								<li><a href="{{URL::to('asset/new')}}"><i class="icon-barcode"></i><span class="hidden-tablet"> Asset</span></a></li>
-								<li><a href="{{URL::to('license/new')}}"><i class="icon-certificate"></i><span class="hidden-tablet"> License</span></a></li>
+								<li><a href="{{URL::to('asset/hardware/new')}}"><i class="icon-barcode"></i><span class="hidden-tablet"> Hardware Asset</span></a></li>
+								<li><a href="{{URL::to('asset/software/new')}}"><i class="icon-certificate"></i><span class="hidden-tablet"> Software Asset</span></a></li>
 								<li><a href="{{URL::to('user/new')}}"><i class="icon-user"></i><span class="hidden-tablet"> User</span></a></li>
 
 							</ul>
 						</li>
 						<!-- end: Message Dropdown -->
-						<li>
-							<a class="btn" href="#">
+						@if(Session::get('user')->admin_right == 1)
+						<li class="dropdown hidden-phone">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-wrench"></i>
 							</a>
+							<ul class="dropdown-menu">
+							    <li class="dropdown-menu-title"></li>
+							    <li><a href="{{URL::to('suppliers')}}"><i class="icon-credit-card"></i><span class="hidden-tablet"> Suppliers</span></a></li>
+							    <li><a href="{{URL::to('manufacturers')}}"><i class="icon-briefcase"></i><span class="hidden-tablet"> Manufacturers</span></a></li>
+							    <li><a href="{{URL::to('locations')}}"><i class="icon-briefcase"></i><span class="hidden-tablet"> Locations</span></a></li>
+
+							</ul>
 						</li>
+						@endif
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
@@ -273,38 +282,39 @@
 
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="{{URL::to('dashboard')}}"><i class="icon-dashboard"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-						<li><a href="#" class="dropmenu"><i class="icon-barcode"></i><span class="hidden-tablet"> Assets</span><span class="label">7</span></a>
+						<li><a href="{{URL::to('dashboard')}}"><i class="icon-dashboard"></i><span class="hidden-tablet">Dashboard</span></a></li>
+						<li><a href="#" class="dropmenu"><i class="icon-barcode"></i><span class="hidden-tablet">Hardware Assets</span><span class="label">4</span></a>
 						    <ul>
-                        		<li><a class="submenu" href="{{URL::to('assets/deployed')}}"><i class="icon-double-angle-up"></i><span class="hidden-tablet">Deployed</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/ready')}}"><i class="icon-angle-up"></i><span class="hidden-tablet">Ready to deploy</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/pending')}}"><i class="icon-asterisk"></i><span class="hidden-tablet"> Pending</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/undeployable')}}"><i class="icon-bug"></i><span class="hidden-tablet">Un-deployable</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/archived')}}"><i class="icon-archive"></i><span class="hidden-tablet">Archived</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/requestable')}}"><i class="icon-angle-right"></i><span class="hidden-tablet">Requestable</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/watching')}}"><i class="icon-eye-open"></i><span class="hidden-tablet">Watching</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('assets/all')}}"><i class="icon-list"></i><span class="hidden-tablet">All</span></a></li>
+                        		<li><a class="submenu" href="{{URL::to('asset/hardware/?status=0')}}"><i class="icon-double-angle-up"></i><span class="hidden-tablet">Deployed</span></a></li>
+                                {{--<li><a class="submenu" href="{{URL::to('asset/hardware/ready')}}"><i class="icon-angle-up"></i><span class="hidden-tablet">Ready to deploy</span></a></li>--}}
+                                {{--<li><a class="submenu" href="{{URL::to('asset/hardware/pending')}}"><i class="icon-asterisk"></i><span class="hidden-tablet">Pending</span></a></li>--}}
+                                <li><a class="submenu" href="{{URL::to('asset/hardware/?status=4')}}"><i class="icon-bug"></i><span class="hidden-tablet">Un-deployable</span></a></li>
+                                {{--<li><a class="submenu" href="{{URL::to('asset/hardware/archived')}}"><i class="icon-archive"></i><span class="hidden-tablet">Archived</span></a></li>--}}
+                                <li><a class="submenu" href="{{URL::to('asset/hardware/?status=1')}}"><i class="icon-angle-right"></i><span class="hidden-tablet">Requestable</span></a></li>
+                                {{--<li><a class="submenu" href="{{URL::to('asset/hardware/watching')}}"><i class="icon-eye-open"></i><span class="hidden-tablet">Watching</span></a></li>--}}
+                                <li><a class="submenu" href="{{URL::to('asset/hardware/all')}}"><i class="icon-list"></i><span class="hidden-tablet">All</span></a></li>
                             </ul>
 						</li>
 						<li><a href="{{URL::to('accessories')}}"><i class="icon-keyboard"></i><span class="hidden-tablet">Accessories</span></a></li>
-						<li><a href="{{URL::to('licenses')}}"><i class="icon-certificate"></i><span class="hidden-tablet"> Licenses</span></a></li>
+						<li><a href="{{URL::to('asset/software/all')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Assets</span></a></li>
 						<li>
-						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Reports</span><span class="label">4</span></a>
+						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reports</span><span class="label">4</span></a>
 						    <ul>
-                                <li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet"> Depreciation Report</span></a></li>
-                            	<li><a class="submenu" href="{{URL::to('report/license')}}"><i class="icon-certificate"></i><span class="hidden-tablet"> License Report</span></a></li>
-                            	<li><a class="submenu" href="{{URL::to('report/asset')}}"><i class="icon-barcode"></i><span class="hidden-tablet"> Asset Report</span></a></li>
-                            	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet"> Custom Report</span></a></li>
+                                <li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet">Depreciation Report</span></a></li>
+                            	<li><a class="submenu" href="{{URL::to('report/asset/hardware')}}"><i class="icon-barcode"></i><span class="hidden-tablet">Hardware Report</span></a></li>
+                            	<li><a class="submenu" href="{{URL::to('report/asset/software')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Report</span></a></li>
+                            	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet">Custom Report</span></a></li>
                             </ul>
 						</li>
 						<li>
-						    <a href="#" class="dropmenu"><i class="icon-group"></i><span class="hidden-tablet"> People</span><span class="label">2</span></a>
+						    <a href="#" class="dropmenu"><i class="icon-group"></i><span class="hidden-tablet">People</span><span class="label">2</span></a>
 						    <ul>
-                                <li><a class="submenu" href="{{URL::to('groups')}}"><i class="icon-group"></i><span class="hidden-tablet"> Groups</span></a></li>
-                                <li><a class="submenu" href="{{URL::to('users')}}"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
+                                <li><a class="submenu" href="{{URL::to('groups')}}"><i class="icon-group"></i><span class="hidden-tablet">Groups</span></a></li>
+                                <li><a class="submenu" href="{{URL::to('users')}}"><i class="icon-user"></i><span class="hidden-tablet">Users</span></a></li>
                             </ul>
 						</li>
 
+						<li><a href="{{URL::to('scan/network')}}"><i class="icon-globe"></i><span class="hidden-tablet">Scan Network</span></a></li>
 
 					</ul>
 				</div>

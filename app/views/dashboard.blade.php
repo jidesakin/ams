@@ -6,26 +6,26 @@
 	@section('row_1')
 	    <div class="span3 smallstat box mobileHalf" ontablet="span6" ondesktop="span3">
         					<i class="icon-barcode blue"></i>
-        					<span class="title">Total Assets</span>
-        					<span class="value">400</span>
+        					<span class="title">Total Hardware Assets</span>
+        					<span class="value">{{$stats['ha_total']}}</span>
         				</div>
 
         				<div class="span3 smallstat box mobileHalf" ontablet="span6" ondesktop="span3">
         					<i class="icon-barcode green"></i>
-        					<span class="title">Assets Available</span>
-        					<span class="value">320</span>
+        					<span class="title">Hardware Assets Available</span>
+        					<span class="value">{{$stats['ha_available']}}</span>
         				</div>
 
         				<div class="span3 smallstat box mobileHalf noMargin" ontablet="span6" ondesktop="span3">
         					<i class="icon-certificate yellow"></i>
-        					<span class="title">Total Licenses</span>
-        					<span class="value">299</span>
+        					<span class="title">Total Software Assets</span>
+        					<span class="value">{{$stats['sa_total']}}</span>
         				</div>
 
         				<div class="span3 smallstat mobileHalf box" ontablet="span6" ondesktop="span3">
         					<i class="icon-certificate green"></i>
-        					<span class="title">Licenses Available</span>
-        					<span class="value">234</span>
+        					<span class="title">Software Assets Available</span>
+        					<span class="value">{{$stats['sa_available']}}</span>
         				</div>
     @stop
     @section('row_2')
