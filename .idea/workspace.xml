@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7bd2c34-2a98-4a69-876b-b6b64f391366" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\xampp\htdocs\ams\app\views\login.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="learninglaravel.iws" />
@@ -424,7 +423,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430003585875</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Location issue!!!">
+      <created>1430092344179</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1430092344179</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
