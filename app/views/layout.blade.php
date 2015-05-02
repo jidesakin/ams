@@ -298,12 +298,12 @@
 						<li><a href="{{URL::to('accessories')}}"><i class="icon-keyboard"></i><span class="hidden-tablet">Accessories</span></a></li>
 						<li><a href="{{URL::to('asset/software/all')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Assets</span></a></li>
 						<li>
-						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reports</span><span class="label">3</span></a>
+						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reports</span><span class="label">2</span></a>
 						    <ul>
                                 {{--<li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet">Depreciation Report</span></a></li>--}}
                             	<li><a class="submenu" href="{{URL::to('report/asset/hardware')}}"><i class="icon-barcode"></i><span class="hidden-tablet">Hardware Report</span></a></li>
                             	<li><a class="submenu" href="{{URL::to('report/asset/software')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Report</span></a></li>
-                            	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet">Custom Report</span></a></li>
+                            	{{--<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet">Custom Report</span></a></li>--}}
                             </ul>
 						</li>
 						<li>

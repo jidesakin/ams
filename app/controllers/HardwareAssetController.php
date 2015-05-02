@@ -209,10 +209,14 @@ class HardwareAssetController extends BaseController{
     public function scanNetwork(){
         if (Session::has('user')){
             try{
-                $url = 'http://localhost:50098/ScannerService.asmx/GetAllDevices';
+                $url = 'http://localhost:50098/ScannerService.asmx/GetAllDevicesJSON';
                 $client = new GuzzleHttp\Client();
                 $response = $client->post($url);
-                echo($response);
+                echo $response->getBody();
+
+
+
+
 
             }catch (FatalErrorException $ex){
                 echo $ex->getMessage();
