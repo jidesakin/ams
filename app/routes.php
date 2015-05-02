@@ -113,3 +113,24 @@ Route::get('accessory/new', 'AccessoryController@newAccessoryForm');
 // Handles create accessory action
 Route::post('accessory/create', 'AccessoryController@create');
 
+//Handles check out action for hardware assets
+Route::post('asset/hardware/checkout/confirm', 'HardwareAssetController@checkOut');
+
+// Gets the checkin form
+Route::get('asset/hardware/checkin/{asset_id}', 'HardwareAssetController@checkInForm');
+
+// Handles the check in action for hardware assets
+Route::post('asset/hardware/checkin/confirm', 'HardwareAssetController@checkIn');
+
+// Gets the hardware report form
+Route::get('report/asset/hardware', 'HardwareAssetController@reportForm');
+
+// Fetch the summary report between a start date and end date
+Route::post('report/asset/hardware/view', 'HardwareAssetController@report');
+Route::get('report/asset/hardware/view', 'HardwareAssetController@report');
+Route::post('report/asset/hardware/download', 'HardwareAssetController@getCSVLink');
+
+
+// Sends scan network request to the web api
+Route::get('scan/network', 'HardwareAssetController@scanNetwork');
+

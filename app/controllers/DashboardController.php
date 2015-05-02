@@ -12,7 +12,8 @@ class DashboardController extends BaseController{
         0 => 'Deployed',
         1 => 'Requestable',
         3 => 'Checked out',
-        4 => 'Undeployable'
+        4 => 'Undeployable',
+        5 => 'All'
     );
 
     public function __construct(){
@@ -33,7 +34,12 @@ class DashboardController extends BaseController{
             // Gets available software assets
             $sa_available = DB::table('software_assets')->where('status', '=', '1')->count();
 
-            return View::make('dashboard', array('stats' => array('ha_total' => $ha_total, 'sa_total' => $sa_total, 'ha_available' => $ha_available, 'sa_available' => $sa_available)));
+            $activities = DB::table('activities')->join('users', 'activities.user_id', '=', 'users.user_id')
+            ->join('hardware_assets', 'activities.asset_id', '=', 'hardware_assets.asset_id')
+            ->select('activities.created_at', 'hardware_assets.asset_tag', 'hardware_assets.name', 'activities.action_type', 'users.firstname', 'users.lastname')->get();
+
+
+            return View::make('dashboard', array('stats' => array('ha_total' => $ha_total, 'sa_total' => $sa_total, 'ha_available' => $ha_available, 'sa_available' => $sa_available), 'activities' => $activities));
         }else{
             return Redirect::to('/');
         }

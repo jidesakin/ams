@@ -10,6 +10,8 @@ class HardwareAsset extends Eloquent {
 
     protected $table = 'hardware_assets';
 
+    protected $primaryKey = 'asset_id';
+
     public static $rules = array(
         'asset_tag' => 'required',
         'serial_number' => 'required',

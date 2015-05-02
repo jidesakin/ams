@@ -693,10 +693,10 @@ function charts() {
             colors: ["#FA5833", "#2FABE9", "#FABB3D", "#78CD51"]
         })
     }
-    var G = [{label: "Internet Explorer", data: 12}, {label: "Mobile", data: 27}, {
-        label: "Safari",
+    var G = [{label: "Watching", data: 12}, {label: "Undeployable", data: 27}, {
+        label: "Deployed",
         data: 85
-    }, {label: "Opera", data: 64}, {label: "Firefox", data: 90}, {label: "Chrome", data: 112}];
+    }, {label: "Checked out", data: 64}, {label: "Archived", data: 90}, {label: "Requestable", data: 112}];
     if ($("#piechart").length) {
         $.plot($("#piechart"), G, {
             series: {pie: {show: true}},

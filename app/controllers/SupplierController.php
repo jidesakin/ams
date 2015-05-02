@@ -22,7 +22,8 @@ class SupplierController extends BaseController{
         if(Session::has('user')) {
 
             //Retrieve all suppliers from the database
-            $suppliers = DB::table('suppliers')->get();
+          $suppliers = DB::select(DB::raw('SELECT suppliers.supplier_id, suppliers.supplier_name, suppliers.address, suppliers.contact_person, suppliers.phone_number, suppliers.email, (SELECT count(hardware_assets.supplier_id) FROM hardware_assets WHERE suppliers.supplier_id = hardware_assets.supplier_id) as number_of_hardware, (SELECT count(software_assets.supplier_id) FROM software_assets WHERE suppliers.supplier_id = software_assets.supplier_id) as number_of_software FROM suppliers
+            '));
 
             // Return a view to display all suppliers by passing suppliers variable to view
             return View::make('suppliers', array('suppliers' => $suppliers));

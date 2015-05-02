@@ -298,9 +298,9 @@
 						<li><a href="{{URL::to('accessories')}}"><i class="icon-keyboard"></i><span class="hidden-tablet">Accessories</span></a></li>
 						<li><a href="{{URL::to('asset/software/all')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Assets</span></a></li>
 						<li>
-						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reports</span><span class="label">4</span></a>
+						    <a href="#" class="dropmenu"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reports</span><span class="label">3</span></a>
 						    <ul>
-                                <li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet">Depreciation Report</span></a></li>
+                                {{--<li><a class="submenu" href="{{URL::to('report/depreciation')}}"><i class="icon-double-angle-down"></i><span class="hidden-tablet">Depreciation Report</span></a></li>--}}
                             	<li><a class="submenu" href="{{URL::to('report/asset/hardware')}}"><i class="icon-barcode"></i><span class="hidden-tablet">Hardware Report</span></a></li>
                             	<li><a class="submenu" href="{{URL::to('report/asset/software')}}"><i class="icon-certificate"></i><span class="hidden-tablet">Software Report</span></a></li>
                             	<li><a class="submenu" href="{{URL::to('report/user')}}"><i class="icon-adjust"></i><span class="hidden-tablet">Custom Report</span></a></li>
@@ -339,7 +339,7 @@
 
 			<div class="row-fluid">
 
-
+                    @yield('row_3')
 			</div>
 
 			<div class="row-fluid">
@@ -417,7 +417,7 @@
 		{{ HTML::script("js/jquery.placeholder.min.js") }}
 		{{ HTML::script("js/wizard.min.js") }}
 		{{ HTML::script("js/core.min.js") }}
-		{{ HTML::script("js/charts.min.js") }}
+		{{ HTML::script("js/charts.js") }}
 		{{ HTML::script("js/custom.min.js") }}
 	<!-- end: JavaScript-->
 

@@ -6,7 +6,10 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-ide-helper": "~1.11"
+		"barryvdh/laravel-ide-helper": "~1.11",
+        "guzzle/guzzle": "~3.9",
+        "guzzlehttp/guzzle": "~5.2",
+        "Nathanmac/Parser": "2.*"
 	},
 	"autoload": {
 		"classmap": [

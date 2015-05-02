@@ -5,6 +5,16 @@
 @stop
 
 @section('row_1')
+@if(Session::has('error'))
+                                     						    <div class="alert alert-error">
+                                     						        {{Session::get('error')}}
+                                     						    </div>
+                                     						  @endif
+                                     						  @if(Session::has('success'))
+                                     						  <div class="alert alert-success control-group">
+                                                                    {{Session::get('success')}}
+                                     						  </div>
+                                                               @endif
         <a href="{{URL::to('asset/hardware/new')}}" class="btn btn-success pull-right"><i class="icon-plus"></i>  Create New</a>
     @stop
 
@@ -39,16 +49,14 @@
             	<td class="center">{{$hardware_asset->model}}</td>
             	<td class="center">{{$asset_status[$hardware_asset->status]}}</td>
             	<td class="center">
-            	@if($hardware_asset->status == 1)
-            	<button class="btn btn-primary">Check out</button>
+            	@if($hardware_asset->status == 1 || $hardware_asset->status == 3)
+            	<a href="{{URL::to('asset/hardware/checkout/'.$hardware_asset->asset_id)}}" class="btn btn-primary">Check out</a>
             	@elseif($hardware_asset->status == 2 || $hardware_asset->status == 0)
-            	<button class="btn btn-success">Check in</button>
+            	<a href="{{URL::to('asset/hardware/checkin/'.$hardware_asset->asset_id)}}" class="btn btn-success">Check in</a>
             	@endif
             	</td>
                 <td class="center">
-            									<a class="btn btn-success" href="#">
-            										<i class="icon-zoom-in "></i>
-            									</a>
+
             									<a class="btn btn-info" href="#">
             										<i class="icon-edit "></i>
             									</a>
