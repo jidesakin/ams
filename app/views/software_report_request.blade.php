@@ -1,7 +1,7 @@
 @extends('layout')
 
     @section('title')
-        Hardware Asset Report | Asset Management System
+        Sotware Asset Report | Asset Management System
     @stop
 
 
@@ -9,7 +9,7 @@
 
       <div class="box span6">
             	                    <div class="box-header">
-                						<h2><i class="icon-bar-chart"></i> View Hardware Asset Report</h2>
+                						<h2><i class="icon-bar-chart"></i> View Software Asset Report</h2>
                 						<div class="box-icon">
                 							<a href="#" class="btn-setting"><i class="icon-wrench"></i></a>
                 							<a href="#" class="btn-minimize"><i class="icon-chevron-up"></i></a>
@@ -17,7 +17,7 @@
                 						</div>
                 					</div>
                 					<div class="box-content">
-                						{{ Form::open(array('url'=> 'report/asset/hardware/view', 'class' => 'form-horizontal')) }}
+                						{{ Form::open(array('url'=> 'report/asset/software/view', 'class' => 'form-horizontal')) }}
 
                                                     						  <fieldset>
                                                     						 @if(Session::has('error'))
@@ -74,7 +74,7 @@
                 						</div>
                 					</div>
                 					<div class="box-content">
-                						{{ Form::open(array('url'=> 'report/asset/hardware/download', 'class' => 'form-horizontal')) }}
+                						{{ Form::open(array('url'=> 'report/asset/software/download', 'class' => 'form-horizontal')) }}
 
                                                     						  <fieldset>
                                                     						 @if(Session::has('error'))

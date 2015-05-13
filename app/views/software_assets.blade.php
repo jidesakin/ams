@@ -5,6 +5,16 @@ Software Assets | Asset Management System
 @stop
 
 @section('row_1')
+@if(Session::has('error'))
+                                     						    <div class="alert alert-error">
+                                     						        {{Session::get('error')}}
+                                     						    </div>
+                                     						  @endif
+                                     						  @if(Session::has('success'))
+                                     						  <div class="alert alert-success control-group">
+                                                                    {{Session::get('success')}}
+                                     						  </div>
+                                                               @endif
         <a href="{{URL::to('asset/software/new')}}" class="btn btn-success pull-right"><i class="icon-plus"></i>  Create New</a>
     @stop
 
@@ -39,15 +49,15 @@ Software Assets | Asset Management System
             	<td class="center">{{$software_asset->remaining_seats}}</td>
             	<td class="center">{{$software_asset->purchased_date}}</td>
             							<td class="center">
-            									<a class="btn btn-success" href="#">
-            										<i class="icon-zoom-in "></i>
-            									</a>
-            									<a class="btn btn-info" href="#">
+            							        <a class="btn btn-primary" href="{{URL::to('asset/software/assign/'.$software_asset->asset_id)}}">Assign to</a>
+
+            									<a class="btn btn-info" href="{{URL::to('asset/software/edit/'.$software_asset->asset_id)}}">
             										<i class="icon-edit "></i>
             									</a>
-            									<a class="btn btn-danger" href="#">
-            										<i class="icon-trash "></i>
-            									</a>
+
+            									{{--<a class="btn btn-danger" href="{{URL::to('asset/software/delete/'.$software_asset->asset_id)}}">--}}
+            										{{--<i class="icon-trash "></i>--}}
+            									{{--</a>--}}
             								</td>
             </tr>
             @endforeach

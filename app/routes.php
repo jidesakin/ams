@@ -130,7 +130,32 @@ Route::post('report/asset/hardware/view', 'HardwareAssetController@report');
 Route::get('report/asset/hardware/view', 'HardwareAssetController@report');
 Route::post('report/asset/hardware/download', 'HardwareAssetController@getCSVLink');
 
+Route::get('report/asset/software', 'SoftwareAssetController@reportForm');
+
+// software report
+Route::post('report/asset/software/view', 'SoftwareAssetController@report');
+Route::get('report/asset/software/view', 'SoftwareAssetController@report');
+Route::post('report/asset/software/download', 'SoftwareAssetController@getCSVLink');
+
 
 // Sends scan network request to the web api
 Route::get('scan/network', 'HardwareAssetController@scanNetwork');
 
+// gets the assign software software page
+Route::get('asset/software/assign/{asset_id}', 'SoftwareAssetController@assignForm');
+
+// handles the confirm assign software asset
+Route::post('asset/software/assign/confirm', 'SoftwareAssetController@assign');
+
+// Handles edit software asset action
+Route::get('asset/software/edit/{asset_id}', 'SoftwareAssetController@edit');
+
+// Handles delete software asset action
+Route::get('asset/software/delete/{asset_id}', 'SoftwareAssetController@delete');
+
+// Handles updates software asset action
+Route::post('asset/software/update', 'SoftwareAssetController@update');
+
+
+// Handles add device from scan result
+Route::get('scan/result/add/{name}', 'HardwareAssetController@addFoundDevice');

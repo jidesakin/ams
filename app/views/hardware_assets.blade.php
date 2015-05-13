@@ -37,7 +37,7 @@
             <th>Model</th>
             <th>Status</th>
             <th>In/Out</th>
-            <th>Actions</th>
+            {{--<th>Actions</th>--}}
         </thead>
         <tbody>
             @foreach($hardware_assets as $hardware_asset)
@@ -55,15 +55,15 @@
             	<a href="{{URL::to('asset/hardware/checkin/'.$hardware_asset->asset_id)}}" class="btn btn-success">Check in</a>
             	@endif
             	</td>
-                <td class="center">
+                {{--<td class="center">--}}
 
-            									<a class="btn btn-info" href="#">
-            										<i class="icon-edit "></i>
-            									</a>
-            									<a class="btn btn-danger" href="#">
-            										<i class="icon-trash "></i>
-            									</a>
-            								</td>
+            									{{--<a class="btn btn-info" href="#">--}}
+            										{{--<i class="icon-edit "></i>--}}
+            									{{--</a>--}}
+            									{{--<a class="btn btn-danger" href="#">--}}
+            										{{--<i class="icon-trash "></i>--}}
+            									{{--</a>--}}
+            								{{--</td>--}}
             </tr>
             @endforeach
         </tbody>

@@ -31,6 +31,17 @@
     @section('row_2')
     <div class="row-fluid">
 
+    @if(Session::has('error'))
+                                         						    <div class="alert alert-error">
+                                         						        {{Session::get('error')}}
+                                         						    </div>
+                                         						  @endif
+                                         						  @if(Session::has('success'))
+                                         						  <div class="alert alert-success control-group"><button class="alert alert-close"></button>
+                                                                        {{Session::get('success')}}
+                                         						  </div>
+                                                                   @endif
+
         <div class="box span12">
     					<div class="box-header">
     						<h2><i class="icon-align-justify"></i><span class="break"></span>Recent Activity</h2>
@@ -56,7 +67,8 @@
 
                                                 <tr>
                                                 	<td>{{$activity->created_at}}</td>
-                                                	<td>{{$activity->name}}</td>
+                                                	@if($activity->asset_type == 0)
+                                                	<td>{{$activity->hardware_name}}</td>
                                                 	<td class="center">{{$activity->asset_tag}}</td>
                                                 	<td class="center">
                                                 	@if($activity->action_type == 0)
@@ -65,9 +77,21 @@
                                                 	<span class="label label-success">Check in</span>
                                                     @endif
                                                 	</td>
-                                                    <td class="center">
-                                                    {{$activity->firstname." ".$activity->lastname}}
-                                                	</td>
+
+                                                	@else
+                                                    <td>{{$activity->software_name}}</td>
+                                                   	<td class="center">N/A</td>
+                                                   	<td class="center">
+                                                   	@if($activity->action_type == 0)
+                                                   	<span class="label label-info">Assigned</span>
+                                                   	@else
+                                                   	<span class="label label-success">N/A</span>
+                                                    @endif
+                                                   	</td>
+                                                	@endif
+                                                	<td class="center">
+                                                                                                        {{$activity->firstname." ".$activity->lastname}}
+                                                                                                    	</td>
                                                 </tr>
                                                 @endforeach
     							  </tbody>

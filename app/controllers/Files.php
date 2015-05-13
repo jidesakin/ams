@@ -18,7 +18,7 @@ class Files
         } else {
             $headers = array(
                 'Content-Type' => 'text/csv',
-                'Content-Disposition' => 'attachment; filename="HardwareAssetReport.csv"'
+                'Content-Disposition' => 'attachment; filename="AssetReport.csv"'
             );
         }
 

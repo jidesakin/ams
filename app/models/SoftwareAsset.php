@@ -17,4 +17,11 @@ class SoftwareAsset extends Eloquent {
 
     );
 
+    public static $asset_status = array(
+        0 => 'Unlicensed',
+        1 => 'Licensed',
+        2 => 'Zero Seats',
+        3 => "All"
+    );
+
 } 

@@ -60,8 +60,11 @@
     							<div class="control-group">
     							  <label class="control-label" for="asset_name">Asset Name </label>
     							  <div class="controls">
-    								<input type="text" class="span6" name="asset_name" id="asset_name" required/>
-
+    							  @if($device_name[0])
+    								<input type="text" class="span6" name="asset_name" id="asset_name" value="{{$device_name[0]}}" required/>
+                                    @else
+                                    <input type="text" class="span6" name="asset_name" id="asset_name"  required/>
+                                    @endif
     							  </div>
     							</div>
     							<div class="control-group">

@@ -15,6 +15,7 @@ class HardwareAssetController extends BaseController{
         1 => 'Requestable',
         2 => 'Checked out',
         3 => 'Undeployable'
+
     );
 
 
@@ -115,6 +116,7 @@ class HardwareAssetController extends BaseController{
             $checkOutActivity->activity_id = '';
             $checkOutActivity->user_id = Session::get('user')->user_id;
             $checkOutActivity->action_type = '0';
+            $checkOutActivity->asset_type = '0';
             $checkOutActivity->details = Input::get('purpose');
             $checkOutActivity->asset_id = $asset_id;
 
@@ -180,29 +182,36 @@ class HardwareAssetController extends BaseController{
 
     public function report(){
 
-        if(Input::exists(array('asset_status', 'start_date', 'end_date'))){
-            $asset_status = Input::get('asset_status');
-            $start_date = Input::get('start_date');
-            $end_date = Input::get('end_date');
-            $aggregates = array();
+        if(Session::has('user')){
+            if(Input::exists(array('asset_status', 'start_date', 'end_date'))){
+                $asset_status = Input::get('asset_status');
+                $start_date = Input::get('start_date');
+                $end_date = Input::get('end_date');
+                $aggregates = array();
 
-            if ($asset_status == '5'){
-                $reports = DB::table('hardware_assets')->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->get();
-                $aggregates = DB::table('hardware_assets')->select(DB::raw('count(*) as total_asset_count, sum(cost_price) as total_cost, (select count(*) from hardware_assets where status = 1) as requestable_count,
+                if ($asset_status == '5'){
+                    $reports = DB::table('hardware_assets')->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->get();
+                    $aggregates = DB::table('hardware_assets')->select(DB::raw('count(*) as total_asset_count, sum(cost_price) as total_cost, (select count(*) from hardware_assets where status = 1) as requestable_count,
                 (select count(*) from hardware_assets where status = 2) as checked_out_count, (select count(*) from hardware_assets where status = 3) as undeployable_count, (select count(*) from hardware_assets where status = 0) as deployed_count'))
-                    ->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->get();
+                        ->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->get();
+
+                }else{
+                    $reports = DB::table('hardware_assets')->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->where('status', '=', $asset_status)->get();
+
+                }
+
+                return View::make('hardware_report', array('reports' => $reports, 'aggregates' => $aggregates, 'start_date' => $start_date, 'end_date' => $end_date, 'asset_status' => $asset_status));
+
 
             }else{
-                $reports = DB::table('hardware_assets')->whereDate('purchased_date', '>=', $start_date, 'and', 'purchased_date', '<=', $end_date)->where('status', '=', $asset_status)->get();
-
+                return Redirect::to('report/asset/hardware');
             }
-
-            return View::make('hardware_report', array('reports' => $reports, 'aggregates' => $aggregates, 'start_date' => $start_date, 'end_date' => $end_date, 'asset_status' => $asset_status));
-
-
         }else{
-            return Redirect::to('report/asset/hardware');
+            return Redirect::to('/');
         }
+
+
+
 
     }
 
@@ -210,18 +219,25 @@ class HardwareAssetController extends BaseController{
         if (Session::has('user')){
             try{
                 $url = 'http://localhost:50098/ScannerService.asmx/GetAllDevicesJSON';
-                $client = new GuzzleHttp\Client();
-                $response = $client->post($url);
-                echo $response->getBody();
 
+                    $client = new GuzzleHttp\Client();
+                    $response = $client->post($url);
 
+                    $devices = json_decode($response->getBody(), false);
+//                var_dump($devices->devices);
 
+                    return View::make("scan_result", array("devices" => $devices->devices));
 
+            }catch (HttpConnectException $ex){
 
-            }catch (FatalErrorException $ex){
-                echo $ex->getMessage();
-//                return Redirect::to('/')->with('message', $ex->getMessage());
-        }
+                return Redirect::to('dashboard')->with('error', "Connection Error! Please try agaain");
+            }catch(\GuzzleHttp\Exception\RequestException $re){
+                return Redirect::to('dashboard')->with('error', "Unable to process request! Please try agaain");
+
+            }catch(Exception $e){
+                return Redirect::to('dashboard')->with('scan_error_msg', 'Network Error! Please check your network and try again');
+
+            }
 
 
         }else{
@@ -252,10 +268,10 @@ class HardwareAssetController extends BaseController{
 
 
         // passing the columns which I want from the result set. Useful when we have not selected required fields
-        $arrColumns = array('asset_id', 'asset_tag', 'name', 'cost_price', 'purchased_date');
+        $arrColumns = array('asset_id', 'asset_tag', 'name', 'model', 'category', 'cost_price', 'purchased_date', 'warranty');
 
         // define the first row which will come as the first row in the csv
-        $arrFirstRow = array('Asset ID', 'Asset Tag', 'Asset Name', 'Purchased Cost', 'Purchased Date');
+        $arrFirstRow = array('Asset ID', 'Asset Tag', 'Asset Name', 'Model', 'Category', 'Purchased Cost', 'Purchased Date', 'Warranty');
 
         // building the options array
         $options = array(
@@ -267,6 +283,28 @@ class HardwareAssetController extends BaseController{
         $Files = new Files;
 
         return $Files->convertToCSV($data, $options);
+    }
+
+    private function timeSublimit($k = 0.8){
+        $limit = ini_get('maximum_execution_time');
+        $sub_limit = round($limit * $k);
+        if($sub_limit === 0){
+            $sub_limit = INF;
+        }
+        return $sub_limit;
+    }
+
+    public function addFoundDevice($name){
+        //Renders new user form
+
+        if(Session::has('user')){
+            $user_options = DB::table('users')->orderBy('username', 'asc')->lists('username', 'user_id');
+            $supplier_options = DB::table('suppliers')->orderBy('supplier_name', 'asc')->lists('supplier_name', 'supplier_id');
+            $location_options = DB::table('locations')->orderBy('location_name', 'asc')->lists('location_name', 'location_id');
+            return View::make('new_hardware_asset', array('supplier_options' => $supplier_options, 'user_options' => $user_options, 'location_options' => $location_options, 'status' => DashboardController::$asset_status, 'device_name' => array($name)))->with('device_name', array($name));
+        }else{
+            return Redirect::to('/');
+        }
     }
 
 

@@ -48,6 +48,9 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
+//    swiitch($exception){
+//        case: Fata
+//    }
 	Log::error($exception);
 });
 
@@ -77,5 +80,7 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
+
+
 
 require app_path().'/filters.php';
